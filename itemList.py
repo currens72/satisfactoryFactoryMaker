@@ -6,28 +6,30 @@ def itemSelection(item, amount):
 ####smelter
     if item == "iron ingot":
         baseIngot("iron", amount)
-    if item == "copper ingot":
+    elif item == "copper ingot":
         baseIngot("copper", amount)
-    if item == "caterium ingot":
+    elif item == "caterium ingot":
         baseIngot("caterium", amount)
 ######################################
 ####constructor
-    if item == "iron plate":
+    elif item == "iron plate":
         constructor(item, amount)
-    if item == "iron rod":
+    elif item == "iron rod":
         constructor(item, amount)
-    if item == "iron rebar":
+    elif item == "iron rebar":
         constructor(item, amount)
-    if item == "screw":
+    elif item == "screw":
         constructor(item, amount)
 ######################################
 ######################################
-    if item == "steel ingot":               #TODO
+    elif item == "steel ingot":               #TODO
         print()
 ######################################
-    if item == "aluminum ingot":            #TODO
+    elif item == "aluminum ingot":            #TODO
         print()
 ######################################
+    else:
+        print("Invalid Selection")
     print("-----------------------------------------------------------------------------------")
 
 def baseIngot(ingot, amount):
