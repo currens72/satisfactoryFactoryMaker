@@ -22,6 +22,8 @@ def menu():
     elif x == 2:
         itemCreation()
     elif x == 3:
+        print()
+        print("Goodbye, you should play more satisfactory though.")
         exit()
     else:
         print(">>INVALID SELECTION")

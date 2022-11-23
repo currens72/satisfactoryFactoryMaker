@@ -1,3 +1,5 @@
+import tkinter as tk
+
 def itemSelection(item, amount):
     print("-----------------------------------------------------------------------------------")
     print("In order to make " + str(amount) + " " + item + "(s) per minute, you need:")
