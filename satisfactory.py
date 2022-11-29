@@ -68,6 +68,7 @@ def main():
 
 main()
 
+#completed item list
 #iron ingot
 #iron plate
 #iron rod
