@@ -37,7 +37,7 @@ def main():
     #frame for desired item entry
     itemFrame = tk.Frame(master=window)
     itemEntry = tk.Entry(master=itemFrame, width=40, font=("Arial", 20))
-    itemLabel = tk.Label(master=itemFrame, text="Enter Desired Item Here:", font=("Arial", 15))
+    itemLabel = tk.Label(master=itemFrame, text="Enter Desired Item Here:", font=("Arial", 20))
     itemEntry.grid(row=1, column=0, sticky="w")
     itemLabel.grid(row=0, column=0, sticky="w")
 
@@ -55,11 +55,11 @@ def main():
 
     #grid layout
     spacer1.grid(row=0, column=0, padx=10, sticky="w")
-    calculateFrame.grid(row=1, column=0, padx=10, sticky="w")
+    calculateFrame.grid(row=5, column=0, padx=10, sticky="w")
     spacer2.grid(row=2, column=0, padx=10, sticky="w")
-    itemFrame.grid(row=3, column=0, padx=10, sticky="w")
+    itemFrame.grid(row=1, column=0, padx=10, sticky="w")
     spacer3.grid(row=4, column=0, padx=10, sticky="w")
-    outputFrame.grid(row=5, column=0, padx=10, sticky="w")
+    outputFrame.grid(row=3, column=0, padx=10, sticky="w")
     spacer5.grid(row=6, column=0, padx=10)
     spacer4.grid(row=0, column=1, padx=10)
     finalStringFrame.place(x=700, y=10)
@@ -74,3 +74,4 @@ main()
 #iron rod
 #copper ingot
 #wire
+#cable
