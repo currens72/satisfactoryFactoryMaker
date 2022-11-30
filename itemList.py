@@ -18,8 +18,18 @@ def itemSelection(item, amount):
         constructorFunction(item, amount)
     elif item == "cable":
         constructorFunction(item, amount)
+    elif item == "concrete":
+        constructorFunction(item, amount)
+    elif item == "screw":
+        constructorFunction(item, amount)
+    elif item == "copper sheet":
+        constructorFunction(item, amount)
 ######################################
 ####assembler
+    elif item == "reinforced iron plate":
+        assemblerFunction(item, amount)
+    elif item == "rotor":
+        assemblerFunction(item, amount)
 ######################################
 ######################################
 ######################################
@@ -37,45 +47,164 @@ def smelterFunction(ingot, amount):
             smelters = round(smelters + ((amount % 30) / 30), 2)
         amount = round(amount, 2)
         finalPower = finalPower + (smelters * 4)
-        finalString = finalString + str(amount) + " " + ingot + " ore per minute" + "\n"
-        finalString = finalString + str(smelters) + " smelter(s) making " + ingot + " ingots" + "\n"
+        finalString = finalString + "\n" + str(amount) + " " + ingot + " ore per minute\n"
+        finalString = finalString + str(smelters) + " smelter(s) making " + ingot + " ingot(s)\n"
 
 def constructorFunction(product, amount):
     global finalString, finalPower
     constructors = 0
-    permin = 0
-    inmin = 0
+    output = 0
+    input1 = 0
     if product == "iron plate":
-        permin = 20
-        inmin = 30
-        constructors = amount // permin
-        if amount % permin > 0:
-            constructors = round(constructors + ((amount % permin) / permin), 2)
-        smelterFunction("iron", amount / permin * inmin)
-        finalString = finalString + str(constructors) + " constructor(s) making " + product + "s" + "\n"
+        output = 20
+        input1 = 30
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        smelterFunction("iron", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
     if product == "iron rod":
-        permin = 15
-        inmin = 15
-        constructors = amount // permin
-        if amount % permin > 0:
-            constructors = round(constructors + ((amount % permin) / permin), 2)
-        smelterFunction("iron", amount / permin * permin)
-        finalString = finalString + str(constructors) + " constructor(s) making " + product + "s" + "\n"
+        output = 15
+        input1 = 15
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        smelterFunction("iron", amount / output * output)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
     if product == "wire":
-        permin = 30
-        inmin = 15
-        constructors = amount // permin
-        if amount % permin > 0:
-            constructors = round(constructors + ((amount % permin) / permin), 2)
-        smelterFunction("copper", amount / permin * inmin)
-        finalString = finalString + str(constructors) + " constructor(s) making " + product + "s" + "\n"
+        output = 30
+        input1 = 15
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        smelterFunction("copper", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
     if product == "cable":
-        permin = 30
-        inmin = 60
-        constructors = amount // permin
-        if amount % permin > 0:
-            constructors = round(constructors + ((amount % permin) / permin), 2)
-        constructorFunction("wire", amount / permin * inmin)
-        finalString = finalString + str(constructors) + " constructor(s) making " + product + "s" + "\n"
-    
+        output = 30
+        input1 = 60
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        constructorFunction("wire", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
+    if product == "concrete":
+        output = 15
+        input1 = 45
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        finalString = finalString + str(round(constructors * 45)) + " limestone per minute\n"
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "\n"
+    if product == "screw":
+        output = 40
+        input1 = 10
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        constructorFunction("iron rod", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
+    if product == "copper sheet":
+        output = 10
+        input1 = 20
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        smelterFunction("copper", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
+
     finalPower = finalPower + (constructors * 4)
+
+def assemblerFunction(product, amount):
+    global finalString, finalPower
+    assemblers = 0
+    input1 = 0
+    input2 = 0
+    output = 0
+    if product == "reinforced iron plate":
+        input1 = 30
+        input2 = 60
+        output = 5
+        assemblers = amount // output
+        if amount % output > 0:
+            assemblers = round(assemblers + ((amount % output) / output), 2)
+        constructorFunction("iron plate", amount / output * input1)
+        constructorFunction("screw", amount / output * input2)
+        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+    if product == "rotor":
+        input1 = 20
+        input2 = 100
+        output = 4
+        assemblers = amount // output
+        if amount % output > 0:
+            assemblers = round(assemblers + ((amount % output) / output), 2)
+        constructorFunction("iron rod", amount / output * input1)
+        constructorFunction("screw", amount / output * input2)
+        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+
+    finalPower = finalPower + (assemblers * 15)
+
+#TODO item list
+
+#TIER 0
+
+#TIER 1
+
+#TIER 2
+
+#TIER 3
+#steel ingot
+#steel beam
+#steel pipe
+#versatile framework
+
+#TIER 4
+#encased industrial beam
+#stator
+#motor
+#automated wiring
+#heavy modular frame
+
+#TIER 5
+#plastic
+#rubber
+#fuel
+#petroleum coke
+#circuit board
+#computer
+#modular engine
+#adaptive control unit
+#empty canister
+
+#TIER 6
+
+#TIER 7
+#alumina solution
+#aluminum scrap
+#aluminum ingot
+#alclad aluminum sheet
+#aluminum casing
+#radio control unit
+#sulfuric acid
+#battery
+#supercomputer
+#assembly director system
+#iodine infused filter
+
+#TIER 8
+#encased uranium cell
+#electromagnetic control rod
+#uranium fuel rod
+#magnetic field generator
+#empty fluid tank
+#heat sink
+#cooling system
+#fused modular frame
+#turbo motor
+#nitric acid
+#non-fissile uranium
+#plutonium pellet
+#encased plutonium cell
+#plutonium fuel rod
+#copper powder
+#pressure conversion cube
+#nuclear pasta
