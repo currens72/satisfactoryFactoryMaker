@@ -24,6 +24,10 @@ def itemSelection(item, amount):
         constructorFunction(item, amount)
     elif item == "copper sheet":
         constructorFunction(item, amount)
+    elif item == "steel beam":
+        constructorFunction(item, amount)
+    elif item == "steel pipe":
+        constructorFunction(item, amount)
 ######################################
 ####assembler
     elif item == "reinforced iron plate":
@@ -31,6 +35,9 @@ def itemSelection(item, amount):
     elif item == "rotor":
         assemblerFunction(item, amount)
 ######################################
+####assembler
+    elif item == "steel ingot":
+        foundryFunction(item, amount)
 ######################################
 ######################################
     else:
@@ -111,6 +118,22 @@ def constructorFunction(product, amount):
             constructors = round(constructors + ((amount % output) / output), 2)
         smelterFunction("copper", amount / output * input1)
         finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
+    if product == "steel beam":
+        output = 15
+        input1 = 60
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        foundryFunction("steel ingot", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
+    if product == "steel pipe":
+        output = 20
+        input1 = 30
+        constructors = amount // output
+        if amount % output > 0:
+            constructors = round(constructors + ((amount % output) / output), 2)
+        foundryFunction("steel ingot", amount / output * input1)
+        finalString = finalString + str(constructors) + " constructor(s) making " + product + "(s)\n"
 
     finalPower = finalPower + (constructors * 4)
 
@@ -143,6 +166,25 @@ def assemblerFunction(product, amount):
 
     finalPower = finalPower + (assemblers * 15)
 
+def foundryFunction(product, amount):
+    global finalString, finalPower
+    foundries = 0
+    input1 = 0
+    input2 = 0
+    output = 0
+    if product == "steel ingot":
+        input1 = 45
+        input2 = 45
+        output = 45
+        foundries = amount // output
+        if amount % output > 0:
+            foundries = round(foundries + ((amount % output) / output), 2)
+        finalString = finalString + "\n" + str(amount / output * input1) + " iron ore per minute\n"
+        finalString = finalString + str(amount / output * input2) + " coal per minute\n"
+        finalString = finalString + str(foundries) + " foundries making " + product + "(s)\n"
+    
+    finalPower = finalPower + (foundries * 16)
+
 #TODO item list
 
 #TIER 0
@@ -152,9 +194,6 @@ def assemblerFunction(product, amount):
 #TIER 2
 
 #TIER 3
-#steel ingot
-#steel beam
-#steel pipe
 #versatile framework
 
 #TIER 4

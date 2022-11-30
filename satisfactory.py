@@ -100,6 +100,9 @@ main()
 #rotor
 
 #TIER 3
+#steel ingot
+#steel beam
+#steel pipe
 
 #TIER 4
 
