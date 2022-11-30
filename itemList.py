@@ -192,6 +192,8 @@ def foundryFunction(product, amount):
 #TIER 1
 
 #TIER 2
+#modular frame
+#smart plating
 
 #TIER 3
 #versatile framework
