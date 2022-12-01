@@ -1,5 +1,6 @@
 def itemSelection(item, amount):
-    global finalString, finalPower
+    global finalString, finalPower, topLevel
+    topLevel = True
     finalString = ""
     finalPower = 0
 ######################################
@@ -33,6 +34,12 @@ def itemSelection(item, amount):
     elif item == "reinforced iron plate":
         assemblerFunction(item, amount)
     elif item == "rotor":
+        assemblerFunction(item, amount)
+    elif item == "modular frame":
+        assemblerFunction(item, amount)
+    elif item == "smart plating":
+        assemblerFunction(item, amount)
+    elif item == "versatile framework":
         assemblerFunction(item, amount)
 ######################################
 ####assembler
@@ -138,7 +145,7 @@ def constructorFunction(product, amount):
     finalPower = finalPower + (constructors * 4)
 
 def assemblerFunction(product, amount):
-    global finalString, finalPower
+    global finalString, finalPower, topLevel
     assemblers = 0
     input1 = 0
     input2 = 0
@@ -150,8 +157,18 @@ def assemblerFunction(product, amount):
         assemblers = amount // output
         if amount % output > 0:
             assemblers = round(assemblers + ((amount % output) / output), 2)
-        constructorFunction("iron plate", amount / output * input1)
-        constructorFunction("screw", amount / output * input2)
+        if topLevel:
+            topLevel = False
+            finalString = finalString + "\n-----------First Input Object Line-----------"
+            topLevel = topLevel - 1
+            constructorFunction("iron plate", amount / output * input1)
+            finalString = finalString + "\n-----------Second Input Object Line-----------"
+            constructorFunction("screw", amount / output * input2)
+            finalString = finalString + "\n-----------Final Assembler(s)-----------\n"
+        else:
+            constructorFunction("iron plate", amount / output * input1)
+            constructorFunction("screw", amount / output * input2)
+            finalString = finalString + "\n"
         finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
     if product == "rotor":
         input1 = 20
@@ -160,8 +177,74 @@ def assemblerFunction(product, amount):
         assemblers = amount // output
         if amount % output > 0:
             assemblers = round(assemblers + ((amount % output) / output), 2)
-        constructorFunction("iron rod", amount / output * input1)
-        constructorFunction("screw", amount / output * input2)
+        if topLevel:
+            topLevel = False
+            finalString = finalString + "\n-----------First Input Object Line-----------"
+            constructorFunction("iron rod", amount / output * input1)
+            finalString = finalString + "\n-----------Second Input Object Line-----------"
+            constructorFunction("screw", amount / output * input2)
+            finalString = finalString + "\n-----------Final Assembler(s)-----------\n"
+        else:
+            constructorFunction("iron rod", amount / output * input1)
+            constructorFunction("screw", amount / output * input2)
+            finalString = finalString + "\n"
+        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+    if product == "modular frame":
+        input1 = 3
+        input2 = 12
+        output = 2
+        assemblers = amount // output
+        if amount % output > 0:
+            assemblers = round(assemblers + ((amount % output) / output), 2)
+        if topLevel:
+            topLevel = False
+            finalString = finalString + "\n-----------First Input Object Line-----------"
+            assemblerFunction("reinforced iron plate", amount / output * input1)
+            finalString = finalString + "\n-----------Second Input Object Line-----------"
+            constructorFunction("iron rod", amount / output * input2)
+            finalString = finalString + "\n-----------Final Assembler(s)-----------\n"
+        else:
+            assemblerFunction("reinforced iron plate", amount / output * input1)
+            constructorFunction("iron rod", amount / output * input2)
+            finalString = finalString + "\n"
+        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+    if product == "smart plating":
+        input1 = 2
+        input2 = 2
+        output = 2
+        assemblers = amount // output
+        if amount % output > 0:
+            assemblers = round(assemblers + ((amount % output) / output), 2)
+        if topLevel:
+            topLevel = False
+            finalString = finalString + "\n-----------First Input Object Line-----------"
+            assemblerFunction("reinforced iron plate", amount / output * input1)
+            finalString = finalString + "\n-----------Second Input Object Line-----------"
+            assemblerFunction("rotor", amount / output * input2)
+            finalString = finalString + "\n-----------Final Assembler(s)-----------\n"
+        else:
+            assemblerFunction("reinforced iron plate", amount / output * input1)
+            assemblerFunction("rotor", amount / output * input2)
+            finalString = finalString + "\n"
+        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+    if product == "versatile framework":
+        input1 = 2.5
+        input2 = 30
+        output = 5
+        assemblers = amount // output
+        if amount % output > 0:
+            assemblers = round(assemblers + ((amount % output) / output), 2)
+        if topLevel:
+            topLevel = False    
+            finalString = finalString + "\n-----------First Input Object Line-----------"
+            assemblerFunction("modular frame", amount / output * input1)
+            finalString = finalString + "\n-----------Second Input Object Line-----------"
+            constructorFunction("steel beam", amount / output * input2)
+            finalString = finalString + "\n-----------Final Assembler(s)-----------\n"
+        else:
+            assemblerFunction("modular frame", amount / output * input1)
+            constructorFunction("steel beam", amount / output * input2)
+            finalString = finalString + "\n"
         finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
 
     finalPower = finalPower + (assemblers * 15)
@@ -192,11 +275,8 @@ def foundryFunction(product, amount):
 #TIER 1
 
 #TIER 2
-#modular frame
-#smart plating
 
 #TIER 3
-#versatile framework
 
 #TIER 4
 #encased industrial beam
@@ -249,3 +329,5 @@ def foundryFunction(product, amount):
 #copper powder
 #pressure conversion cube
 #nuclear pasta
+
+#Alternate Recipes

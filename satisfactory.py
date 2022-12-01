@@ -49,7 +49,8 @@ def main():
 
     #frame for desired item entry
     itemFrame = tk.Frame(master=window, bg="gray15")
-    itemEntry = tk.Entry(master=itemFrame, width=40, font=("Arial", 20), bg="gray60")
+    stringVar = tk.StringVar()
+    itemEntry = tk.Entry(master=itemFrame, textvariable=stringVar, width=40, font=("Arial", 20), bg="gray60")
     itemLabel = tk.Label(master=itemFrame, text="Enter Desired Item Here:", font=("Arial", 20), bg="gray60")
     itemEntry.grid(row=1, column=0, sticky="w")
     itemLabel.grid(row=0, column=0, sticky="w")
@@ -68,14 +69,47 @@ def main():
 
     #grid layout
     spacer1.grid(row=0, column=0, padx=10, sticky="w")
-    calculateFrame.grid(row=5, column=0, padx=10, sticky="w")
-    spacer2.grid(row=2, column=0, padx=10, sticky="w")
+    calculateFrame.grid(row=6, column=0, padx=10, sticky="w")
+    spacer2.grid(row=3, column=0, padx=10, sticky="w")
     itemFrame.grid(row=1, column=0, padx=10, sticky="w")
-    spacer3.grid(row=4, column=0, padx=10, sticky="w")
-    outputFrame.grid(row=3, column=0, padx=10, sticky="w")
-    spacer5.grid(row=6, column=0, padx=10, sticky="w")
+    spacer3.grid(row=5, column=0, padx=10, sticky="w")
+    outputFrame.grid(row=4, column=0, padx=10, sticky="w")
+    spacer5.grid(row=7, column=0, padx=10, sticky="w")
     spacer4.grid(row=0, column=1, padx=10)
     finalStringFrame.place(x=700, y=10)
+
+    #autocomplete stuff
+    def my_upd(my_widget):
+        my_w = my_widget.widget
+        index = int(my_w.curselection()[0])
+        value = my_w.get(index)
+        stringVar.set(value)
+        l1.delete(0,END)
+    def my_down(my_widget):
+        l1.focus()
+        l1.selection_set(0)
+
+    l1 = tk.Listbox(window,
+                    height=3,
+                    width=40,
+                    bg="gray30",
+                    font=("Arial", 20),
+                    relief='flat',
+                    highlightcolor= 'SystemButtonFace')
+    l1.grid(row=2,column=0)
+
+    def get_data(*args):
+        search_str = itemEntry.get()
+        l1.delete(0,END)
+        for element in completedItemList:
+            if(re.match(search_str,element,re.IGNORECASE)):
+                l1.insert(tk.END,element)
+    
+    itemEntry.bind('<Down>', my_down)
+    l1.bind('<Right>', my_upd)
+    l1.bind('<Return>', my_upd)
+    stringVar.trace('w',get_data)
+    #autocomplete stuff
 
     window.mainloop()
 
@@ -98,11 +132,14 @@ completedItemList = [
 #TIER 2
 'copper sheet',
 'rotor',
+'modular frame',
+'smart plating',
 
 #TIER 3
 'steel ingot',
 'steel beam',
-'steel pipe'
+'steel pipe',
+'versatile framework'
 
 #TIER 4
 
@@ -113,6 +150,11 @@ completedItemList = [
 #TIER 7
 
 #TIER 8
+
+#Alternate Recipes
 ]
+
+#switch list to alphabetical
+completedItemList = sorted(completedItemList)
 
 main()
