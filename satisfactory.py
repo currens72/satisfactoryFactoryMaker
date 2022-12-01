@@ -1,6 +1,7 @@
 import itemList
 import tkinter as tk
 from tkinter import END
+from tkinter import *
 import re
 
 def itemCreation():
@@ -29,6 +30,9 @@ def main():
     window.geometry("1650x1000")
     window.resizable(width=True, height=True)
     window.config(bg="gray15")
+    #Grid.rowconfigure(window,0,weight=1)
+    #Grid.columnconfigure(window,0,weight=1)
+    #Grid.rowconfigure(window,1,weight=1)
 
     #spacer labels
     spacer1 = tk.Label(master=window, text="\n", font=("Arial", 5), bg="gray15")
@@ -45,38 +49,53 @@ def main():
                                 command=itemCreation,
                                 bg="gray60"
                                 )
-    calculateButton.grid(row=1, column=0, sticky="w")
+    calculateButton.pack(side=LEFT and TOP, anchor=W)
 
     #frame for desired item entry
     itemFrame = tk.Frame(master=window, bg="gray15")
     stringVar = tk.StringVar()
     itemEntry = tk.Entry(master=itemFrame, textvariable=stringVar, width=40, font=("Arial", 20), bg="gray60")
     itemLabel = tk.Label(master=itemFrame, text="Enter Desired Item Here:", font=("Arial", 20), bg="gray60")
-    itemEntry.grid(row=1, column=0, sticky="w")
-    itemLabel.grid(row=0, column=0, sticky="w")
+    itemLabel.pack(side=LEFT and TOP, anchor=W)
+    itemEntry.pack(side=LEFT and TOP, anchor=W)
 
     #frame for desired output per min of item
     outputFrame = tk.Frame(master=window, bg="gray15")
     outputEntry = tk.Entry(master=outputFrame, width=5, font=("Arial", 20), bg="gray60")
     outputLabel = tk.Label(master=outputFrame, text="Enter Desired Output /min Here:", font=("Arial", 20), bg="gray60")
-    outputEntry.grid(row=1, column=0, sticky="w")
-    outputLabel.grid(row=0, column=0, sticky="w")
+    outputLabel.pack(side=LEFT and TOP, anchor=W)
+    outputEntry.pack(side=LEFT and TOP, anchor=W)
 
     #frame for final string
-    finalStringFrame = tk.Frame(master=window, bg="gray15")
-    finalStringTextBox = tk.Text(master=finalStringFrame, height=30, width=60, font=("Arial", 20), bg="gray60")
-    finalStringTextBox.grid(row=0, column=0, sticky="w")
+    finalStringTextBox = tk.Text(master=window, font=("Arial", 20), bg="gray60")
+
+    l1 = tk.Listbox(window,
+                    height=3,
+                    width=40,
+                    bg="gray30",
+                    font=("Arial", 20),
+                    relief='flat',
+                    highlightcolor= 'SystemButtonFace')
 
     #grid layout
-    spacer1.grid(row=0, column=0, padx=10, sticky="w")
-    calculateFrame.grid(row=6, column=0, padx=10, sticky="w")
-    spacer2.grid(row=3, column=0, padx=10, sticky="w")
-    itemFrame.grid(row=1, column=0, padx=10, sticky="w")
-    spacer3.grid(row=5, column=0, padx=10, sticky="w")
-    outputFrame.grid(row=4, column=0, padx=10, sticky="w")
-    spacer5.grid(row=7, column=0, padx=10, sticky="w")
-    spacer4.grid(row=0, column=1, padx=10)
-    finalStringFrame.place(x=700, y=10)
+    #spacer1.grid(row=0, column=0, padx=10, sticky="nsew")
+    #calculateFrame.grid(row=6, column=0, padx=10, sticky="nsew")
+    #spacer2.grid(row=3, column=0, padx=10, sticky="nsew")
+    #itemFrame.grid(row=1, column=0, padx=10, sticky="nsew")
+    #spacer3.grid(row=5, column=0, padx=10, sticky="nsew")
+    #outputFrame.grid(row=4, column=0, padx=10, sticky="nsew")
+    #spacer5.grid(row=7, column=0, padx=10, sticky="nsew")
+    #spacer4.grid(row=0, column=1, padx=10, sticky="nsew")
+    #finalStringFrame.grid(column=2, padx=10, sticky="nsew")
+    #spacer1.pack(side=LEFT and TOP)
+    itemFrame.pack(side=LEFT and TOP, anchor=W)
+    l1.pack(side=LEFT and TOP, anchor=W)
+    spacer2.pack(side=LEFT and TOP, anchor=W)
+    outputFrame.pack(side=LEFT and TOP, anchor=W)
+    spacer3.pack(side=LEFT and TOP, anchor=W)
+    calculateFrame.pack(side=LEFT and TOP, anchor=W)
+    finalStringTextBox.pack(side=RIGHT, anchor=E)
+
 
     #autocomplete stuff
     def my_upd(my_widget):
@@ -89,14 +108,7 @@ def main():
         l1.focus()
         l1.selection_set(0)
 
-    l1 = tk.Listbox(window,
-                    height=3,
-                    width=40,
-                    bg="gray30",
-                    font=("Arial", 20),
-                    relief='flat',
-                    highlightcolor= 'SystemButtonFace')
-    l1.grid(row=2,column=0)
+    #l1.grid(row=2,column=0, padx=10, sticky="nsew")
 
     def get_data(*args):
         search_str = itemEntry.get()
