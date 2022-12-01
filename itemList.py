@@ -406,9 +406,9 @@ def manufacturerFunction(product, amount):
         input3 = 10
         input4 = 200
         output = 2
-        assemblers = amount // output
+        manufacturers = amount // output
         if amount % output > 0:
-            assemblers = round(assemblers + ((amount % output) / output), 2)
+            manufacturers = round(manufacturers + ((amount % output) / output), 2)
         if topLevel:
             topLevel = False    
             finalString = finalString + "-----------First Input Object Line-----------\n"
@@ -429,7 +429,7 @@ def manufacturerFunction(product, amount):
             finalString = finalString + "----------\n"
             constructorFunction("screw", amount / output * input4)
             finalString = finalString + "\n"
-        finalString = finalString + str(assemblers) + " assembler(s) making " + product + "(s)\n"
+        finalString = finalString + str(manufacturers) + " manufacturer(s) making " + product + "(s)\n"
     finalPower = finalPower + (manufacturers * 55)
 
 #TODO item list
