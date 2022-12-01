@@ -67,7 +67,11 @@ def main():
     outputEntry.pack(side=LEFT and TOP, anchor=W)
 
     #frame for final string
-    finalStringTextBox = tk.Text(master=window, font=("Arial", 20), bg="gray60")
+    finalStringTextBox = tk.Text(master=window,
+                                 font=("Arial", 15),
+                                 bg="gray60",
+                                 wrap=WORD
+                                 )
 
     l1 = tk.Listbox(window,
                     height=3,
@@ -75,7 +79,8 @@ def main():
                     bg="gray30",
                     font=("Arial", 20),
                     relief='flat',
-                    highlightcolor= 'SystemButtonFace')
+                    highlightcolor= 'SystemButtonFace'
+                    )
 
     #grid layout
     #spacer1.grid(row=0, column=0, padx=10, sticky="nsew")
@@ -87,14 +92,14 @@ def main():
     #spacer5.grid(row=7, column=0, padx=10, sticky="nsew")
     #spacer4.grid(row=0, column=1, padx=10, sticky="nsew")
     #finalStringFrame.grid(column=2, padx=10, sticky="nsew")
-    #spacer1.pack(side=LEFT and TOP)
-    itemFrame.pack(side=LEFT and TOP, anchor=W)
-    l1.pack(side=LEFT and TOP, anchor=W)
-    spacer2.pack(side=LEFT and TOP, anchor=W)
-    outputFrame.pack(side=LEFT and TOP, anchor=W)
-    spacer3.pack(side=LEFT and TOP, anchor=W)
-    calculateFrame.pack(side=LEFT and TOP, anchor=W)
-    finalStringTextBox.pack(side=RIGHT, anchor=E)
+    spacer1.pack(side=LEFT, anchor=W)
+    finalStringTextBox.pack(side=RIGHT, anchor=N, fill=Y, padx=10, expand=TRUE)
+    itemFrame.pack(anchor=W)
+    l1.pack(anchor=W)
+    spacer2.pack(anchor=W)
+    outputFrame.pack(anchor=W)
+    spacer3.pack(anchor=W)
+    calculateFrame.pack(anchor=W)
 
 
     #autocomplete stuff
@@ -151,9 +156,14 @@ completedItemList = [
 'steel ingot',
 'steel beam',
 'steel pipe',
-'versatile framework'
+'versatile framework',
 
 #TIER 4
+'encased industrial beam',
+'stator',
+'motor',
+'automated wiring',
+'heavy modular frame'
 
 #TIER 5
 
@@ -162,6 +172,8 @@ completedItemList = [
 #TIER 7
 
 #TIER 8
+
+#M.A.M.
 
 #Alternate Recipes
 ]
