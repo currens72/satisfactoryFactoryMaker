@@ -1,5 +1,7 @@
 import itemList
 import tkinter as tk
+from tkinter import END
+import re
 
 def itemCreation():
     item = itemEntry.get()
@@ -78,31 +80,29 @@ def main():
     window.mainloop()
 
 #intiator line
-main()
 
-#completed item list
-
+completedItemList = [
 #TIER 0
-#iron ingot
-#iron plate
-#iron rod
-#copper ingot
-#wire
-#cable
-#concrete
-#screw
-#reinforced iron plate
+'iron ingot',
+'iron plate',
+'iron rod',
+'copper ingot',
+'wire',
+'cable',
+'concrete',
+'screw',
+'reinforced iron plate',
 
 #TIER 1
 
 #TIER 2
-#copper sheet
-#rotor
+'copper sheet',
+'rotor',
 
 #TIER 3
-#steel ingot
-#steel beam
-#steel pipe
+'steel ingot',
+'steel beam',
+'steel pipe'
 
 #TIER 4
 
@@ -113,3 +113,6 @@ main()
 #TIER 7
 
 #TIER 8
+]
+
+main()
